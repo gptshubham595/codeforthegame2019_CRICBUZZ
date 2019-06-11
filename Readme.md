@@ -65,7 +65,9 @@ Our other sources of communications include
 
 
 
+## LEGAL & DISCLAIMER
 
+Please refer to [COPYING](COPYING).
 
 
 
