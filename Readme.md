@@ -55,7 +55,6 @@ git clone https://github.com/gptshubham595/codeforthegame2019_CRICBUZZ.git
 
 ## Communication
 
-Please use IRC to discuss questions regarding the project: #kiwix on irc.freenode.net
 
 You can use IRC web interface on [http://gitter.me/DREAMIITG/](http://gitter.me/DREAMIITG/).
 
