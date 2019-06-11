@@ -1,6 +1,6 @@
 
 
-**DREAMIITG**
+# **DREAMIITG**
 
 
 app inspired by Dream11
@@ -18,14 +18,14 @@ app inspired by Dream11
 
 
 
-##OVERVIEW
+## OVERVIEW
 
 
 DreamIITG like dream11 is also a fantasy sports platform based in India that allows users to play fantasy cricket, this game involves superior knowledge, judgement and attention. So,  being a legitimate apo in India. It is an online game where users create a virtual team of real-life players and earn points based on the performances of these players in real matches. A user who scores the maximum points in his joined contest attains the first rank on the leader-board. DreamIITG offers free contests. 
 
 
 
-##GUIDELINES
+## GUIDELINES
 
 **Build ONLY FOR ANDROID**
 
