@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">ApnaBank</string>
+	<string name="need_a_new_account">NEED A NEW ACCOUNT ?</string>
+    <string name="display_name">Display Name</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="create_account">CREATE ACCOUNT</string>
+    <string name="log_out">Log Out</string>
+	<string name="username">Username</string>
+    <string name="guide_page">Guide Page</string>
+    <string name="presents">presents</string>
+    <string name="forgot">Forgot Password</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="sign_in">Sign In</string>
+	<string name="facebook_app_id">64766462375220</string>
+	<string name="fb_login_protocol_scheme">fb64766462375220</string>
+</resources>
