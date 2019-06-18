@@ -1,8 +1,10 @@
 package com.shubham.fintech;
 
 
+import android.graphics.drawable.ColorDrawable;
+import android.net.Uri;
 import android.support.annotation.NonNull;
-
+import android.app.AlertDialog;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -11,7 +13,10 @@ import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.Snackbar;
+import android.support.design.widget.TextInputEditText;
 import android.support.v4.view.ViewPager;
+import android.support.v7.view.ContextThemeWrapper;
 import android.view.View;
 import android.widget.EditText;
 import android.text.TextUtils;
@@ -22,17 +27,29 @@ import android.widget.Toast;
 import android.content.Intent;
 
 import com.firebase.ui.auth.AuthUI;
+import com.firebase.ui.auth.IdpResponse;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.common.SignInButton;
+import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.GoogleAuthCredential;
+import com.google.firebase.auth.GoogleAuthProvider;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.iid.FirebaseInstanceId;
 
 import com.rengwuxian.materialedittext.MaterialEditText;
+import com.shubham.fintech.activity.MainActivity;
 import com.shubham.wowoviewpager.Animation.WoWoAlphaAnimation;
 import com.shubham.wowoviewpager.Animation.WoWoElevationAnimation;
 import com.shubham.wowoviewpager.Animation.WoWoPathAnimation;
@@ -56,11 +73,12 @@ public class GuidePageActivity2 extends WoWoActivity {
     private boolean animationAdded = false;
     private ImageView targetPlanet;
     private View loginLayout,loginLayout1,loginLayout2;
-    Button login,register;
-    MaterialEditText email;
-    EditText password;
+    Button login,register,singout;
+    MaterialEditText email, password;
+    private SignInButton google;
+    GoogleSignInClient googleSignInClient;
     List<AuthUI.IdpConfig> providers;
-    TextView forgot;
+    TextView forgot,help;
     @Override
     protected int contentViewRes() {
         return R.layout.activity_guide_page2;
@@ -91,37 +109,56 @@ public class GuidePageActivity2 extends WoWoActivity {
 		
 		////////========================================================
 		
-		mLoginProgress = new ProgressDialog(this);
+		mLoginProgress = new ProgressDialog(this,R.style.dialog);
 
         mUserDatabase = FirebaseDatabase.getInstance().getReference().child("Users");
 		
 		
 		////////========================================================
 		
-
+        google=findViewById(R.id.google);
         forgot=findViewById(R.id.forgot);
         email=findViewById(R.id.email);
         password=findViewById(R.id.password);
         login=findViewById(R.id.login);
         register=findViewById(R.id.register);
-
-        providers= Arrays.asList(
+		help=findViewById(R.id.help);
+		///=====
+        GoogleSignInOptions gso=new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail().build();
+        googleSignInClient= GoogleSignIn.getClient(this,gso);
+        google.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                signin();
+            }
+        });
+///======
+  /*      providers= Arrays.asList(
         new AuthUI.IdpConfig.GoogleBuilder().build(),
         new AuthUI.IdpConfig.FacebookBuilder().build(),
         new AuthUI.IdpConfig.PhoneBuilder().build()
         );
-		showsigninoption();
-
-		
+		showsigninoption();*/
+///======
+		password.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if(hasFocus){
+                    if(password.getText().length()<8){password.setError("min 8 digits");}
+                }else{password.setError(null);}
+            }
+        });
 		register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 String emailis = email.getText().toString();
                 String passwordis = password.getText().toString();
-
-                if(!TextUtils.isEmpty(emailis) || !TextUtils.isEmpty(passwordis)) {
-
+                if(TextUtils.isEmpty(emailis)){email.setError("Enter email!");}
+                if(TextUtils.isEmpty(passwordis)){password.setError("Enter password!");}
+                if(!TextUtils.isEmpty(emailis) && !TextUtils.isEmpty(passwordis)) {
+                    password.setError(null);
+                    email.setError(null);
                     mLoginProgress.setTitle("Registering User");
                     mLoginProgress.setMessage("Please wait while we create your account !");
                     mLoginProgress.setCanceledOnTouchOutside(false);
@@ -142,9 +179,11 @@ public class GuidePageActivity2 extends WoWoActivity {
                 
 				String emailis = email.getText().toString();
                 String passwordis = password.getText().toString();
-
-                if(!TextUtils.isEmpty(emailis) || !TextUtils.isEmpty(passwordis)) {
-
+                if(TextUtils.isEmpty(emailis)){email.setError("Enter email!");}
+                if(TextUtils.isEmpty(passwordis)){password.setError("Enter password!");}
+                if(!TextUtils.isEmpty(emailis) && !TextUtils.isEmpty(passwordis)) {
+                    password.setError(null);
+                    email.setError(null);
                     mLoginProgress.setTitle("Logging In");
                     mLoginProgress.setMessage("Please wait while we check your credentials.");
                     mLoginProgress.setCanceledOnTouchOutside(false);
@@ -160,6 +199,8 @@ public class GuidePageActivity2 extends WoWoActivity {
             public void onClick(View v) {
                 String emailis = email.getText().toString();
                 if(!TextUtils.isEmpty(emailis)){
+                    password.setError(null);
+                    email.setError(null);
                     mAuth.sendPasswordResetEmail(emailis).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
@@ -169,10 +210,18 @@ public class GuidePageActivity2 extends WoWoActivity {
                         }
                     });
                 }
-                else{Toast.makeText(getApplicationContext(),"Please enter a email..",Toast.LENGTH_SHORT).show();}
+                else{ email.setError("Enter email !");
+                    password.setError(null);
+
+                    Toast.makeText(getApplicationContext(),"Please enter a email..",Toast.LENGTH_SHORT).show();}
             }
         });
-
+		help.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                        makedialog();
+		}
+        });
         ImageView earth = (ImageView) findViewById(R.id.earth);
         targetPlanet = (ImageView) findViewById(R.id.planet_target);
         loginLayout = findViewById(R.id.login_layout);
@@ -191,8 +240,20 @@ public class GuidePageActivity2 extends WoWoActivity {
 		wowo.addTemporarilyInvisibleViews(2, loginLayout2, findViewById(R.id.forgot));
 		
     }
+    private void signin(){
+        Intent sign=googleSignInClient.getSignInIntent();
+        startActivityForResult(sign,1);
+    }
+private void makedialog(){
+        AlertDialog.Builder mBuilder = new AlertDialog.Builder(new ContextThemeWrapper(this,R.style.dialog));
+        View mView = getLayoutInflater().inflate(R.layout.dialog_option, null);       
+        mBuilder.setView(mView);
+        final AlertDialog dialog = mBuilder.create();
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        dialog.show();
+    }
 
-    private void showsigninoption() {
+/*    private void showsigninoption() {
         startActivityForResult(AuthUI.getInstance().createSignInIntentBuilder()
         .setAvailableProviders(providers)
         .setTheme(R.style.MyTheme)
@@ -203,6 +264,105 @@ public class GuidePageActivity2 extends WoWoActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode==MYcode){
+            IdpResponse response = IdpResponse.fromResultIntent(data);
+            if(resultCode==RESULT_OK){
+                FirebaseUser user=FirebaseAuth.getInstance().getCurrentUser();
+                Toast.makeText(this, ""+user.getEmail(), Toast.LENGTH_SHORT).show();
+                singout.setEnabled(true);
+            }else{
+                Toast.makeText(this, ""+response.getError(), Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+    public void signout(){
+        AuthUI.getInstance().signOut(this).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+           if(task.isSuccessful()){singout.setEnabled(true);}
+           else{
+               showsigninoption();
+           }
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(GuidePageActivity2.this, ""+e.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    */
+@Override
+protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+    super.onActivityResult(requestCode, resultCode, data);
+    if(requestCode==MYcode){
+       Task<GoogleSignInAccount> task=GoogleSignIn.getSignedInAccountFromIntent(data);
+       try {
+           GoogleSignInAccount account=task.getResult(ApiException.class);
+           firebaseauthwithgoogle(account);
+       }catch (ApiException e){}
+    }
+}
+
+    private void firebaseauthwithgoogle(GoogleSignInAccount account) {
+        AuthCredential credential= GoogleAuthProvider.getCredential(account.getIdToken(),null);
+        mAuth.signInWithCredential(credential).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+            @Override
+            public void onComplete(@NonNull Task<AuthResult> task) {
+           if(task.isSuccessful()){
+               FirebaseUser user=mAuth.getCurrentUser();
+               updateUI(user);
+           }else{
+               Toast.makeText(GuidePageActivity2.this, "Sorry! Login Failed", Toast.LENGTH_SHORT).show();
+               updateUI(null);
+           }
+            }
+        });
+    }
+
+    private void updateUI(FirebaseUser user) {
+    GoogleSignInAccount account=GoogleSignIn.getLastSignedInAccount(getApplicationContext());
+    if(account!=null){
+        String name=account.getDisplayName();
+        String givenname=account.getGivenName();
+        String email=account.getEmail();
+        String Id=account.getId();
+        Uri photo=account.getPhotoUrl();
+
+
+
+        FirebaseUser current_user = FirebaseAuth.getInstance().getCurrentUser();
+
+        mDatabase = FirebaseDatabase.getInstance().getReference().child("Users").child(Id);
+
+        String device_token = FirebaseInstanceId.getInstance().getToken();
+
+        HashMap<String, String> userMap = new HashMap<>();
+        userMap.put("name", name);
+        userMap.put("status", "Hi there I'm using DreamIITG App.");
+        userMap.put("image", "default");
+        userMap.put("thumb_image", "default");
+        userMap.put("device_token", device_token);
+
+        mDatabase.setValue(userMap).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+
+                if(task.isSuccessful()){
+                    Intent mainIntent = new Intent(getApplicationContext(), MainActivity.class);
+                    mainIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    startActivity(mainIntent);
+                    Toast.makeText(getApplicationContext(),"Registered!! and Logged In",Toast.LENGTH_LONG).show();
+
+                }
+
+            }
+        });
+
+
+
+    }
     }
 
     @Override
@@ -243,11 +403,6 @@ public class GuidePageActivity2 extends WoWoActivity {
                                 mLoginProgress.dismiss();
                                 sendEmailVerification();
                                 Toast.makeText(getApplicationContext(),"Registered!! Please verify Email Confirmation and Login",Toast.LENGTH_LONG).show();
-
-                                Intent mainIntent = new Intent(getApplicationContext(), MainActivity.class);
-                                mainIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                                startActivity(mainIntent);
-                                finish();
 
                             }
 
