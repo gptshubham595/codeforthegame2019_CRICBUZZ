@@ -72,7 +72,7 @@ public class GuidePageActivity2 extends WoWoActivity {
     private int r;
     private boolean animationAdded = false;
     private ImageView targetPlanet;
-    private View loginLayout,loginLayout1,loginLayout2;
+    private View loginLayout,loginLayout1,loginLayout2,loginLayout3;
     Button login,register,singout;
     MaterialEditText email, password;
     private SignInButton google;
@@ -227,6 +227,7 @@ public class GuidePageActivity2 extends WoWoActivity {
         loginLayout = findViewById(R.id.login_layout);
 		loginLayout1 = findViewById(R.id.login_layout);
 		loginLayout2 = findViewById(R.id.login_layout);
+		loginLayout3 = findViewById(R.id.login_layout);
 
         earth.setY(screenH / 2);
         targetPlanet.setY(-screenH / 2 - screenW / 2);
@@ -238,6 +239,7 @@ public class GuidePageActivity2 extends WoWoActivity {
         wowo.addTemporarilyInvisibleViews(2, loginLayout, findViewById(R.id.login));
 		wowo.addTemporarilyInvisibleViews(2, loginLayout1, findViewById(R.id.register));
 		wowo.addTemporarilyInvisibleViews(2, loginLayout2, findViewById(R.id.forgot));
+		wowo.addTemporarilyInvisibleViews(2, loginLayout3, findViewById(R.id.google));
 		
     }
     private void signin(){
@@ -313,6 +315,8 @@ protected void onActivityResult(int requestCode, int resultCode, @Nullable Inten
            if(task.isSuccessful()){
                FirebaseUser user=mAuth.getCurrentUser();
                updateUI(user);
+			   
+			   
            }else{
                Toast.makeText(GuidePageActivity2.this, "Sorry! Login Failed", Toast.LENGTH_SHORT).show();
                updateUI(null);
@@ -355,7 +359,7 @@ protected void onActivityResult(int requestCode, int resultCode, @Nullable Inten
                     startActivity(mainIntent);
                     Toast.makeText(getApplicationContext(),"Registered!! and Logged In",Toast.LENGTH_LONG).show();
 
-                }
+                }else{Toast.makeText(getApplicationContext(),"Sorry",Toast.LENGTH_LONG).show();}
 
             }
         });
@@ -521,6 +525,8 @@ protected void onActivityResult(int requestCode, int resultCode, @Nullable Inten
                 loginLayout1.setVisibility(position + positionOffset <= 2 ? View.INVISIBLE : View.VISIBLE);
 				loginLayout2.setEnabled(position == 3);
                 loginLayout2.setVisibility(position + positionOffset <= 2 ? View.INVISIBLE : View.VISIBLE);
+				loginLayout3.setEnabled(position == 3);
+                loginLayout3.setVisibility(position + positionOffset <= 2 ? View.INVISIBLE : View.VISIBLE);
             }
         });
     }
@@ -668,6 +674,8 @@ protected void onActivityResult(int requestCode, int resultCode, @Nullable Inten
         wowo.addAnimation(findViewById(R.id.password))
                 .add(WoWoAlphaAnimation.builder().page(2).from(0).to(1).build());
         wowo.addAnimation(findViewById(R.id.forgot))
+                .add(WoWoAlphaAnimation.builder().page(2).from(0).to(1).build());
+				wowo.addAnimation(findViewById(R.id.google))
                 .add(WoWoAlphaAnimation.builder().page(2).from(0).to(1).build());
     }
 }
