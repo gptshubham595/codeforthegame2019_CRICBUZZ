@@ -32,6 +32,9 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
+/**
+ * Created by sakhi on 3/27/2017.
+ */
 public class bat_bowl_ining_2 extends Fragment {
     public bat_inig2_Adapter bat_inig1_adapter;
     public bowl_ining2_Adapter bowl_ining1_adapter;

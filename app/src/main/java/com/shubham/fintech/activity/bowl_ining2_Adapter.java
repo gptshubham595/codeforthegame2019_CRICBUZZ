@@ -11,7 +11,9 @@ import android.widget.TextView;
 
 import com.shubham.fintech.R;
 
- 
+/**
+ * Created by sakhi on 3/27/2017.
+ */
 public class bowl_ining2_Adapter extends BaseAdapter {
     bat_bowl_ining_2 main;
 
@@ -50,7 +52,7 @@ public class bowl_ining2_Adapter extends BaseAdapter {
 
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
-        bowl_ining2_Adapter.ViewHolderItem holder = new bowl_ining2_Adapter.ViewHolderItem();
+        ViewHolderItem holder = new ViewHolderItem();
         if (convertView == null) {
             LayoutInflater inflater = (LayoutInflater) main.getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             convertView = inflater.inflate(R.layout.bowling_list_cell, null);
@@ -63,7 +65,7 @@ public class bowl_ining2_Adapter extends BaseAdapter {
             holder.R = (TextView) convertView.findViewById(R.id.R);
             convertView.setTag(holder);
         } else {
-            holder = (bowl_ining2_Adapter.ViewHolderItem) convertView.getTag();
+            holder = (ViewHolderItem) convertView.getTag();
         }
       /*  holder.TW = this.main.live_data_list.get(position).TW;
         holder.decisn = this.main.live_data_list.get(position).decisn;

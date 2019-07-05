@@ -80,8 +80,7 @@ public class full_scoreboard extends AppCompatActivity {
         mToolbar.setTitleTextColor(Color.WHITE);
 
         score_board();
-       //setUpLayoutAdmob1();
-    }
+     }
 
 
 
@@ -362,29 +361,6 @@ public class full_scoreboard extends AppCompatActivity {
 
     }
 
-  /*private void setUpLayoutAdmob1() {
-
-        if (ApplicationUtils.isOnline(this)) {
-            boolean b = true;
-            if (b) {
-                mInterstitial = new InterstitialAd(this);
-                mInterstitial.setAdUnitId(ADMOB_ID_INTERTESTIAL);
-                mInterstitial.loadAd(new AdRequest.Builder().build());
-
-                mInterstitial.setAdListener(new AdListener() {
-                    @Override
-                    public void onAdLoaded() {
-                        // TODO Auto-generated method stub
-                        super.onAdLoaded();
-                        if (mInterstitial.isLoaded()) {
-                            mInterstitial.show();
-                        }
-                    }
-                });
-
-            }
-        }
-    }*/
 
     @Override
     public void onBackPressed() {

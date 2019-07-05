@@ -1,4 +1,7 @@
-<resources>
+<resources
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:ignore="MissingTranslation"
+    >
     <string name="app_name">DREAMITG</string>
     <string name="need_a_new_account">NEED A NEW ACCOUNT ?</string>
     <string name="display_name">Display Name</string>
@@ -31,10 +34,7 @@
     <string name="nav_item_IPL">IPL</string>
     <string name="nav_item_notifications">Latest News</string>
     <string name="about">About</string>
-    <string name="rate">Rate</string>
-    <string name="share">Share</string>
-    <string name="more">More</string>
-
+    <string name="sign_out">Sign out</string>
     <!-- navigation drawer item labels  -->
     <string-array name="nav_drawer_labels">
         <item>@string/nav_item_home</item>
@@ -42,9 +42,7 @@
         <item>@string/nav_item_IPL</item>
         <item>@string/nav_item_notifications</item>
         <item>@string/about</item>
-        <item>@string/rate</item>
-        <item>@string/share</item>
-        <item>@string/more</item>
+        <item>@string/sign_out</item>
     </string-array>
 
     <string name="about_msg">A small project inspired by DREAM11 to make this DREAMIITG.</string> 

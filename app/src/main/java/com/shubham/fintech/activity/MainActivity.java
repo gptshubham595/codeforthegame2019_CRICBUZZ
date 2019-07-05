@@ -26,36 +26,33 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
-import com.shubham.fintech.App.AppController;
-import com.shubham.fintech.App.Constants;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.ServerValue;
+import com.shubham.fintech.GuidePageActivity2;
 import com.shubham.fintech.R;
-
+import com.shubham.fintech.activity.FragmentDrawer;
 import com.shubham.fintech.adapter.PagerAdapter;
 import com.ypyproductions.utils.ApplicationUtils;
 
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 public class MainActivity extends AppCompatActivity implements FragmentDrawer.FragmentDrawerListener {
     public ViewPager viewPager;
     private static String TAG = MainActivity.class.getSimpleName();
     FloatingActionButton foting;
     private Toolbar mToolbar;
-    private FragmentDrawer drawerFragment;
+    public  FragmentDrawer drawerFragment;
     private ActionBar actionBar;
     FrameLayout ly;
     ImageView draw_image;
-
     Runnable refresh;
-    public static final String ADMOB_ID_BANNER = "ca-app-pub-9972921565167432/6005897703";
-    private FirebaseAuth mAuth;
+    FirebaseAuth mAuth;
     private final Handler handler = new Handler();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        mAuth = FirebaseAuth.getInstance();
+        mAuth=FirebaseAuth.getInstance();
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
         foting = (FloatingActionButton) findViewById(R.id.fab);
         setSupportActionBar(mToolbar);
@@ -70,7 +67,7 @@ public class MainActivity extends AppCompatActivity implements FragmentDrawer.Fr
         tabLayout.setTabMode(TabLayout.MODE_SCROLLABLE);
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
         viewPager = (ViewPager) findViewById(R.id.pager);
-        //setUpLayoutAdmob();
+
         final PagerAdapter adapter = new PagerAdapter(getSupportFragmentManager(), tabLayout.getTabCount());
         viewPager.setAdapter(adapter);
 
@@ -205,16 +202,7 @@ public class MainActivity extends AppCompatActivity implements FragmentDrawer.Fr
 
                 break;
             case 4:
-                showDiaglogAboutUs();
-                break;
-            case 5:
-                rateme();
-                break;
-            case 6:
-                share();
-                break;
-            case 7:
-                more();
+                signout();
                 break;
             default:
                 break;
@@ -231,31 +219,17 @@ public class MainActivity extends AppCompatActivity implements FragmentDrawer.Fr
         }
     }
 
+    private void signout() {
+        FirebaseAuth.getInstance().signOut();
+        sendToStart();
 
-   /*private void setUpLayoutAdmob() {
-        RelativeLayout layout = (RelativeLayout) findViewById(R.id.layout_ad);
-        if (ApplicationUtils.isOnline(this)) {
-            boolean b = true;
-            if (b) {
-                adView = new AdView(this);
-                adView.setAdUnitId(ADMOB_ID_BANNER);
-                adView.setAdSize(AdSize.SMART_BANNER);
-
-                layout.addView(adView);
-                AdRequest mAdRequest = new AdRequest.Builder().build();
-                adView.loadAd(mAdRequest);
+    }
 
 
-            } else {
-                layout.setVisibility(View.GONE);
-            }
-        } else {
-            layout.setVisibility(View.GONE);
-        }
-    }*/
+
     public void rateme() {
 
-        Intent intent = new Intent(android.content.Intent.ACTION_VIEW);
+        Intent intent = new Intent(Intent.ACTION_VIEW);
 
         //Copy App URL from Google Play Store.
         intent.setData(Uri.parse("https://play.google.com/store/apps/details?id=%1$s"));
@@ -267,7 +241,7 @@ public class MainActivity extends AppCompatActivity implements FragmentDrawer.Fr
 
     public void more() {
 
-        Intent intent = new Intent(android.content.Intent.ACTION_VIEW);
+        Intent intent = new Intent(Intent.ACTION_VIEW);
 
         //Copy App URL from Google Play Store.
         intent.setData(Uri.parse("https://play.google.com/store/apps/details?id=%1$s"));
@@ -311,4 +285,35 @@ public class MainActivity extends AppCompatActivity implements FragmentDrawer.Fr
 
 
     }
+    public void onStart() {
+        super.onStart();
+        // Check if user is signed in (non-null) and update UI accordingly.
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+
+        if(currentUser == null){
+
+            sendToStart();
+
+        }
+
+    }
+
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+
+
+    }
+
+    private void sendToStart() {
+
+        Intent startIntent = new Intent(MainActivity.this, GuidePageActivity2.class);
+        startActivity(startIntent);
+        finish();
+
+    }
+
 }

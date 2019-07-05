@@ -1,6 +1,7 @@
 package com.shubham.fintech;
 
 
+import android.app.Dialog;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.support.annotation.NonNull;
@@ -72,12 +73,9 @@ public class GuidePageActivity2 extends WoWoActivity {
     private int r;
     private boolean animationAdded = false;
     private ImageView targetPlanet;
-    private View loginLayout,loginLayout1,loginLayout2,loginLayout3;
-    Button login,register,singout;
+    private View loginLayout,loginLayout1,loginLayout2,loginLayout3,loginLayout4;
+    Button login,register;
     MaterialEditText email, password;
-    private SignInButton google;
-    GoogleSignInClient googleSignInClient;
-    List<AuthUI.IdpConfig> providers;
     TextView forgot,help;
     @Override
     protected int contentViewRes() {
@@ -102,45 +100,25 @@ public class GuidePageActivity2 extends WoWoActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-		mAuth = FirebaseAuth.getInstance();
+        FirebaseDatabase.getInstance().setPersistenceEnabled(true);
+        mAuth = FirebaseAuth.getInstance();
         r = (int)Math.sqrt(screenW * screenW + screenH * screenH) + 10;
-		
-		
-		////////========================================================
-		
-		mLoginProgress = new ProgressDialog(this,R.style.dialog);
+
+        mLoginProgress = new ProgressDialog(this,R.style.dialog);
 
         mUserDatabase = FirebaseDatabase.getInstance().getReference().child("Users");
-		
-		
-		////////========================================================
-		
-        google=findViewById(R.id.google);
+
+
+
         forgot=findViewById(R.id.forgot);
         email=findViewById(R.id.email);
         password=findViewById(R.id.password);
         login=findViewById(R.id.login);
         register=findViewById(R.id.register);
-		help=findViewById(R.id.help);
-		///=====
-        GoogleSignInOptions gso=new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail().build();
-        googleSignInClient= GoogleSignIn.getClient(this,gso);
-        google.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                signin();
-            }
-        });
-///======
-  /*      providers= Arrays.asList(
-        new AuthUI.IdpConfig.GoogleBuilder().build(),
-        new AuthUI.IdpConfig.FacebookBuilder().build(),
-        new AuthUI.IdpConfig.PhoneBuilder().build()
-        );
-		showsigninoption();*/
-///======
-		password.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+        help=findViewById(R.id.help);
+        ///=====
+
+        password.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
                 if(hasFocus){
@@ -148,7 +126,7 @@ public class GuidePageActivity2 extends WoWoActivity {
                 }else{password.setError(null);}
             }
         });
-		register.setOnClickListener(new View.OnClickListener() {
+        register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -170,14 +148,14 @@ public class GuidePageActivity2 extends WoWoActivity {
                 }
             }
         });
-		
-		
-		
+
+
+
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                
-				String emailis = email.getText().toString();
+
+                String emailis = email.getText().toString();
                 String passwordis = password.getText().toString();
                 if(TextUtils.isEmpty(emailis)){email.setError("Enter email!");}
                 if(TextUtils.isEmpty(passwordis)){password.setError("Enter password!");}
@@ -191,8 +169,8 @@ public class GuidePageActivity2 extends WoWoActivity {
 
                     loginUser(emailis, passwordis);
                 }else{Toast.makeText(GuidePageActivity2.this, "Please Enter Details first", Toast.LENGTH_SHORT).show();}
-				
-				}
+
+            }
         });
         forgot.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -216,19 +194,19 @@ public class GuidePageActivity2 extends WoWoActivity {
                     Toast.makeText(getApplicationContext(),"Please enter a email..",Toast.LENGTH_SHORT).show();}
             }
         });
-		help.setOnClickListener(new View.OnClickListener() {
+        help.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                        makedialog();
-		}
+                makedialog();
+            }
         });
         ImageView earth = (ImageView) findViewById(R.id.earth);
         targetPlanet = (ImageView) findViewById(R.id.planet_target);
         loginLayout = findViewById(R.id.login_layout);
-		loginLayout1 = findViewById(R.id.login_layout);
-		loginLayout2 = findViewById(R.id.login_layout);
-		loginLayout3 = findViewById(R.id.login_layout);
-
+        loginLayout1 = findViewById(R.id.login_layout);
+        loginLayout2 = findViewById(R.id.login_layout);
+        loginLayout3 = findViewById(R.id.login_layout);
+        loginLayout4 = findViewById(R.id.login_layout);
         earth.setY(screenH / 2);
         targetPlanet.setY(-screenH / 2 - screenW / 2);
         targetPlanet.setScaleX(0.25f);
@@ -237,137 +215,23 @@ public class GuidePageActivity2 extends WoWoActivity {
         wowo.addTemporarilyInvisibleViews(0, earth, findViewById(R.id.cloud_blue), findViewById(R.id.cloud_red));
         wowo.addTemporarilyInvisibleViews(0, targetPlanet);
         wowo.addTemporarilyInvisibleViews(2, loginLayout, findViewById(R.id.login));
-		wowo.addTemporarilyInvisibleViews(2, loginLayout1, findViewById(R.id.register));
-		wowo.addTemporarilyInvisibleViews(2, loginLayout2, findViewById(R.id.forgot));
-		wowo.addTemporarilyInvisibleViews(2, loginLayout3, findViewById(R.id.google));
-		
-    }
-    private void signin(){
-        Intent sign=googleSignInClient.getSignInIntent();
-        startActivityForResult(sign,1);
-    }
-private void makedialog(){
-        AlertDialog.Builder mBuilder = new AlertDialog.Builder(new ContextThemeWrapper(this,R.style.dialog));
-        View mView = getLayoutInflater().inflate(R.layout.dialog_option, null);       
-        mBuilder.setView(mView);
-        final AlertDialog dialog = mBuilder.create();
-        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-        dialog.show();
-    }
-
-/*    private void showsigninoption() {
-        startActivityForResult(AuthUI.getInstance().createSignInIntentBuilder()
-        .setAvailableProviders(providers)
-        .setTheme(R.style.MyTheme)
-                .build(),MYcode
-        );
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode==MYcode){
-            IdpResponse response = IdpResponse.fromResultIntent(data);
-            if(resultCode==RESULT_OK){
-                FirebaseUser user=FirebaseAuth.getInstance().getCurrentUser();
-                Toast.makeText(this, ""+user.getEmail(), Toast.LENGTH_SHORT).show();
-                singout.setEnabled(true);
-            }else{
-                Toast.makeText(this, ""+response.getError(), Toast.LENGTH_SHORT).show();
-            }
-        }
-    }
-    public void signout(){
-        AuthUI.getInstance().signOut(this).addOnCompleteListener(new OnCompleteListener<Void>() {
-            @Override
-            public void onComplete(@NonNull Task<Void> task) {
-           if(task.isSuccessful()){singout.setEnabled(true);}
-           else{
-               showsigninoption();
-           }
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                Toast.makeText(GuidePageActivity2.this, ""+e.getMessage(), Toast.LENGTH_SHORT).show();
-            }
-        });
-    }
-
-    */
-@Override
-protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-    super.onActivityResult(requestCode, resultCode, data);
-    if(requestCode==MYcode){
-       Task<GoogleSignInAccount> task=GoogleSignIn.getSignedInAccountFromIntent(data);
-       try {
-           GoogleSignInAccount account=task.getResult(ApiException.class);
-           firebaseauthwithgoogle(account);
-       }catch (ApiException e){}
-    }
-}
-
-    private void firebaseauthwithgoogle(GoogleSignInAccount account) {
-        AuthCredential credential= GoogleAuthProvider.getCredential(account.getIdToken(),null);
-        mAuth.signInWithCredential(credential).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-            @Override
-            public void onComplete(@NonNull Task<AuthResult> task) {
-           if(task.isSuccessful()){
-               FirebaseUser user=mAuth.getCurrentUser();
-               updateUI(user);
-			   
-			   
-           }else{
-               Toast.makeText(GuidePageActivity2.this, "Sorry! Login Failed", Toast.LENGTH_SHORT).show();
-               updateUI(null);
-           }
-            }
-        });
-    }
-
-    private void updateUI(FirebaseUser user) {
-    GoogleSignInAccount account=GoogleSignIn.getLastSignedInAccount(getApplicationContext());
-    if(account!=null){
-        String name=account.getDisplayName();
-        String givenname=account.getGivenName();
-        String email=account.getEmail();
-        String Id=account.getId();
-        Uri photo=account.getPhotoUrl();
-
-
-
-        FirebaseUser current_user = FirebaseAuth.getInstance().getCurrentUser();
-
-        mDatabase = FirebaseDatabase.getInstance().getReference().child("Users").child(Id);
-
-        String device_token = FirebaseInstanceId.getInstance().getToken();
-
-        HashMap<String, String> userMap = new HashMap<>();
-        userMap.put("name", name);
-        userMap.put("status", "Hi there I'm using DreamIITG App.");
-        userMap.put("image", "default");
-        userMap.put("thumb_image", "default");
-        userMap.put("device_token", device_token);
-
-        mDatabase.setValue(userMap).addOnCompleteListener(new OnCompleteListener<Void>() {
-            @Override
-            public void onComplete(@NonNull Task<Void> task) {
-
-                if(task.isSuccessful()){
-                    Intent mainIntent = new Intent(getApplicationContext(), MainActivity.class);
-                    mainIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                    startActivity(mainIntent);
-                    Toast.makeText(getApplicationContext(),"Registered!! and Logged In",Toast.LENGTH_LONG).show();
-
-                }else{Toast.makeText(getApplicationContext(),"Sorry",Toast.LENGTH_LONG).show();}
-
-            }
-        });
-
+        wowo.addTemporarilyInvisibleViews(2, loginLayout1, findViewById(R.id.register));
+        wowo.addTemporarilyInvisibleViews(2, loginLayout2, findViewById(R.id.forgot));
+        wowo.addTemporarilyInvisibleViews(2, loginLayout2, findViewById(R.id.help));
 
 
     }
+
+    private void makedialog(){
+        final AlertDialog alertDialog = new AlertDialog.Builder(this)
+                .setView(R.layout.dialog_option)
+                .setTitle("Help")
+                .setNegativeButton("close", null)
+                .show();
+
     }
+
+
 
     @Override
     public void onWindowFocusChanged(boolean hasFocus) {
@@ -375,7 +239,7 @@ protected void onActivityResult(int requestCode, int resultCode, @Nullable Inten
         addAnimations();
     }
 
-	    private void register_user( String email, String password) {
+    private void register_user( String email, String password) {
 
         mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
@@ -403,7 +267,7 @@ protected void onActivityResult(int requestCode, int resultCode, @Nullable Inten
                         public void onComplete(@NonNull Task<Void> task) {
 
                             if(task.isSuccessful()){
-                                
+
                                 mLoginProgress.dismiss();
                                 sendEmailVerification();
                                 Toast.makeText(getApplicationContext(),"Registered!! Please verify Email Confirmation and Login",Toast.LENGTH_LONG).show();
@@ -426,7 +290,7 @@ protected void onActivityResult(int requestCode, int resultCode, @Nullable Inten
 
     }
 
-     
+
     private void sendEmailVerification() {
         FirebaseUser user=FirebaseAuth.getInstance().getCurrentUser();
         if(user!=null){
@@ -446,7 +310,7 @@ protected void onActivityResult(int requestCode, int resultCode, @Nullable Inten
         }
 
     }
-	private void loginUser(String email, String password) {
+    private void loginUser(String email, String password) {
 
 
         mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
@@ -463,11 +327,11 @@ protected void onActivityResult(int requestCode, int resultCode, @Nullable Inten
                     mUserDatabase.child(current_user_id).child("device_token").setValue(deviceToken).addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
                         public void onSuccess(Void aVoid) {
-                        if(mAuth.getCurrentUser().isEmailVerified()){
-                            Intent mainIntent = new Intent(getApplicationContext(), MainActivity.class);
-                            mainIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                            startActivity(mainIntent);
-                        }else{Toast.makeText(getApplicationContext(),"Please Verify Email or enter correct details",Toast.LENGTH_SHORT).show();}
+                            if(mAuth.getCurrentUser().isEmailVerified()){
+                                Intent mainIntent = new Intent(getApplicationContext(), MainActivity.class);
+                                mainIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                startActivity(mainIntent);
+                            }else{Toast.makeText(getApplicationContext(),"Please Verify Email or enter correct details",Toast.LENGTH_SHORT).show();}
                             finish();
 
 
@@ -492,9 +356,9 @@ protected void onActivityResult(int requestCode, int resultCode, @Nullable Inten
 
 
     }
-	
-	
-	
+
+
+
     private void addAnimations() {
         if (animationAdded) return;
         animationAdded = true;
@@ -521,11 +385,11 @@ protected void onActivityResult(int requestCode, int resultCode, @Nullable Inten
                 super.onPageScrolled(position, positionOffset, positionOffsetPixels);
                 loginLayout.setEnabled(position == 3);
                 loginLayout.setVisibility(position + positionOffset <= 2 ? View.INVISIBLE : View.VISIBLE);
-				loginLayout1.setEnabled(position == 3);
+                loginLayout1.setEnabled(position == 3);
                 loginLayout1.setVisibility(position + positionOffset <= 2 ? View.INVISIBLE : View.VISIBLE);
-				loginLayout2.setEnabled(position == 3);
+                loginLayout2.setEnabled(position == 3);
                 loginLayout2.setVisibility(position + positionOffset <= 2 ? View.INVISIBLE : View.VISIBLE);
-				loginLayout3.setEnabled(position == 3);
+                loginLayout3.setEnabled(position == 3);
                 loginLayout3.setVisibility(position + positionOffset <= 2 ? View.INVISIBLE : View.VISIBLE);
             }
         });
@@ -675,7 +539,7 @@ protected void onActivityResult(int requestCode, int resultCode, @Nullable Inten
                 .add(WoWoAlphaAnimation.builder().page(2).from(0).to(1).build());
         wowo.addAnimation(findViewById(R.id.forgot))
                 .add(WoWoAlphaAnimation.builder().page(2).from(0).to(1).build());
-				wowo.addAnimation(findViewById(R.id.google))
+        wowo.addAnimation(findViewById(R.id.help))
                 .add(WoWoAlphaAnimation.builder().page(2).from(0).to(1).build());
     }
 }

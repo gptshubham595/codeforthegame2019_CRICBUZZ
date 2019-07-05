@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.shubham.fintech.activity.recent">
+    tools:context=".activity.recent">
     <RelativeLayout
         android:id="@+id/content_main"
         android:orientation="vertical"

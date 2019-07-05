@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/windowBackground" >
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/img_logo"
+            android:layout_width="230dp"
+            android:layout_height="230dp"
+            android:background="@drawable/ball"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="190dp" />
+    <ImageView
+    android:id="@+id/tv_app_name"
+    android:layout_width="wrap_content"
+    android:layout_height="320dp"
+        android:layout_centerInParent="true"
+    android:text="@string/app_name"
+        android:layout_alignParentBottom="true"
+    android:background="@drawable/title" />
+
+    <RelativeLayout
+        android:layout_width="30dp"
+        android:layout_height="320dp"
+        android:gravity="bottom"
+        android:layout_alignParentBottom="true"
+        android:background="#2565fd">
+
+
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="30dp"
+        android:layout_height="320dp"
+        android:gravity="bottom"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:background="#2565fd">
+
+
+    </RelativeLayout>
+    <ProgressBar
+        android:id="@+id/progressBar1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerInParent="true"
+android:layout_marginBottom="100dp"
+        />
+
+</RelativeLayout>
+
+
+
+    </LinearLayout>
+
