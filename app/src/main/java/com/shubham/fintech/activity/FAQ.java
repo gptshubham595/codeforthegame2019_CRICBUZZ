@@ -55,7 +55,7 @@ public class FAQ extends AppCompatActivity {
     }
 
     private void feed() {
-        String url="https://bit.ly/feediitg";
+        String url="https://bit.ly/feediitg1";
         Intent browser=new Intent(getApplicationContext(), Url.class);
         browser.putExtra("heading","FEEDBACK");
         browser.putExtra("url",url);

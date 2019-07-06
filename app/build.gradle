@@ -8,8 +8,8 @@ android {
         applicationId "com.shubham.fintech"
         minSdkVersion 21
         targetSdkVersion 28
-        versionCode 1
-        versionName "1.0.0"
+        versionCode 4
+        versionName "1.0.3"
         multiDexEnabled = true
     }
     dexOptions {

@@ -408,8 +408,9 @@ public class MainActivity extends AppCompatActivity implements FragmentDrawer.Fr
     private void sendToStart() {
 
         Intent startIntent = new Intent(MainActivity.this, GuidePageActivity2.class);
+        startIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(startIntent);
-        finish();
+
 
     }
 
