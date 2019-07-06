@@ -82,10 +82,10 @@
     <item>@string/nav_item_IPL</item>
 
     <item>@string/nav_item_notifications</item>
+    <item>"FAQ"</item>
 
     <item>@string/about</item>
 
-    <item>"FAQ"</item>
     <item>"Quiz"</item>
 
     <item>@string/sign_out</item>
@@ -150,5 +150,6 @@
     <string name="title_activity_ads">AdsActivity</string>
 
     <string name="title_activity_last_screen">LastScreen</string>
+    <string name="faq"><u>FAQ</u></string>
 
 </resources>
