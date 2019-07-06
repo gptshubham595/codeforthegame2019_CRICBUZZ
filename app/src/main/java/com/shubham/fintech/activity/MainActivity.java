@@ -211,25 +211,23 @@ public class MainActivity extends AppCompatActivity implements FragmentDrawer.Fr
                 title = getString(R.string.title_messages);
 
                 break;
+            
             case 4:
-                Quiz();
-                break;
-            case 5:
                 detail();
                 break;
-            case 6:
+            case 5:
                 seelive();
                 break;
-            case 7:
+            case 6:
                 faq();
                 break;
-            case 8:
+            case 7:
                 About();
                 break;
-            case 9:
+            case 8:
                 share();
                 break;
-            case 10:
+            case 9:
                 signout();
                 break;
             default:
