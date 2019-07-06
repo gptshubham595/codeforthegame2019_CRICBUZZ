@@ -10,6 +10,7 @@ import android.widget.TextView;
 import androidx.browser.browseractions.BrowserActionsIntent;
 
 import com.shubham.fintech.R;
+import com.shubham.fintech.Url;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -44,7 +45,10 @@ public class About extends AppCompatActivity {
 
     private void go() {
         String url="https://www.fb.com/gptshubham595";
-    Intent i=new Intent(Intent.ACTION_VIEW, Uri.parse(url));
-    startActivity(i);
+
+        Intent browser=new Intent(getApplicationContext(), Url.class);
+        browser.putExtra("heading","MEET SHUBHAM");
+        browser.putExtra("url",url);
+        startActivity(browser);
     }
 }
