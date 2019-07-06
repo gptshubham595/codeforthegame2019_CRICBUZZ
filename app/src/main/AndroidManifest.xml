@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.shubham.fintech"
+    android:targetSandboxVersion="1"
     tools:ignore="GoogleAppIndexingWarning">
 
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
@@ -15,38 +16,35 @@
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
     <uses-permission android:name="android.permission.WRITE_SETTINGS" />
 
-
     <application
-        android:allowBackup="true"
         android:name=".App.AppController"
+        android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:largeHeap="true"
         android:roundIcon="@mipmap/ic_launcher"
         android:supportsRtl="true"
-
-        android:theme="@style/MyMaterialTheme">
+        android:theme="@style/MyMaterialTheme"
+        android:networkSecurityConfig="@xml/network_security_config"
+        android:usesCleartextTraffic="true"
+        >
+        <activity android:name=".Url"></activity>
         <activity
             android:name=".activity.MainActivity"
-            android:label="@string/app_name" >
-
-        </activity>
+            android:label="@string/app_name" />
         <activity
             android:name=".activity.About"
-            android:parentActivityName=".activity.MainActivity"
-            android:label="About" >
-        </activity>
+            android:label="About"
+            android:parentActivityName=".activity.MainActivity" />
         <activity
             android:name=".activity.FAQ"
             android:label="FAQ"
-            android:parentActivityName=".activity.MainActivity">
-        </activity>
-
+            android:parentActivityName=".activity.MainActivity" />
         <activity
             android:name=".activity.SplashActivity"
             android:configChanges="touchscreen|keyboard|keyboardHidden|navigation|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"
             android:label="@string/app_name"
-            android:screenOrientation="portrait" >
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -55,9 +53,7 @@
         </activity>
         <activity
             android:name=".GuidePageActivity2"
-            android:theme="@style/ShowAppTheme">
-        </activity>
-
+            android:theme="@style/ShowAppTheme" />
 
         <uses-library
             android:name="org.apache.http.legacy"

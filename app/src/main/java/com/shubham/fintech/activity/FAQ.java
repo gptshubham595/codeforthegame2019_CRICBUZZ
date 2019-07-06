@@ -8,6 +8,8 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.shubham.fintech.R;
+import com.shubham.fintech.Url;
+
 public class FAQ extends AppCompatActivity {
 
     @Override
@@ -46,13 +48,17 @@ public class FAQ extends AppCompatActivity {
 
     private void github() {
         String url="https://bit.ly/gitshubham";
-        Intent i=new Intent(Intent.ACTION_VIEW, Uri.parse(url));
-        startActivity(i);
+        Intent browser=new Intent(getApplicationContext(), Url.class);
+        browser.putExtra("heading","GITHUB SHUBHAM");
+        browser.putExtra("url",url);
+        startActivity(browser);
     }
 
     private void feed() {
         String url="https://bit.ly/feediitg";
-        Intent i=new Intent(Intent.ACTION_VIEW, Uri.parse(url));
-        startActivity(i);
+        Intent browser=new Intent(getApplicationContext(), Url.class);
+        browser.putExtra("heading","FEEDBACK");
+        browser.putExtra("url",url);
+        startActivity(browser);
     }
 }

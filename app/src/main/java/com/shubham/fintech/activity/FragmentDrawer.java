@@ -43,10 +43,13 @@ public class FragmentDrawer extends Fragment {
             R.drawable.recentmatches,
             R.drawable.ipl,
             R.drawable.news,
+            R.drawable.icbulb,
+            R.drawable.score,
+            R.drawable.live,
             R.drawable.about,
             R.drawable.ic_person,
-            R.drawable.icbulb,
-            R.drawable.ic_pass
+            R.drawable.share,
+            R.drawable.ic_lock
             };
 
     public FragmentDrawer() {

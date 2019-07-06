@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 
-    <resources tools:ignore="MissingTranslation" xmlns:tools="http://schemas.android.com/tools">
+<resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
 
     <string name="app_name">DREAMITG</string>
 
@@ -33,7 +33,8 @@
     <string name="fb_login_protocol_scheme">fb64766462375220</string>
 
 
-    -<string name="dreamiitg">
+    -
+    <string name="dreamiitg">
 
 <u>DREAMIITG</u>
 
@@ -72,25 +73,25 @@
     <!-- navigation drawer item labels -->
 
 
+    -
+    <string-array name="nav_drawer_labels">
 
-    -<string-array name="nav_drawer_labels">
+        <item>@string/nav_item_home</item>
 
-    <item>@string/nav_item_home</item>
+        <item>@string/nav_item_friends</item>
 
-    <item>@string/nav_item_friends</item>
+        <item>@string/nav_item_IPL</item>
 
-    <item>@string/nav_item_IPL</item>
+        <item>@string/nav_item_notifications</item>
+        <item>"Quiz"</item>
+        <item>"WC2019 Score Table"</item>
+        <item>"See Live WC2019"</item>
+        <item>"FAQ"</item>
+        <item>@string/about</item>
+        <item>"Share"</item>
+        <item>@string/sign_out</item>
 
-    <item>@string/nav_item_notifications</item>
-    <item>"FAQ"</item>
-
-    <item>@string/about</item>
-
-    <item>"Quiz"</item>
-
-    <item>@string/sign_out</item>
-
-</string-array>
+    </string-array>
 
     <string name="about_msg">A small project inspired by DREAM11 to make this DREAMIITG.</string>
 
@@ -117,11 +118,12 @@
     <string name="title_settings">Setting</string>
 
 
-    -<string-array name="list_share">
+    -
+    <string-array name="list_share">
 
-    <item>Disclaimer</item>
+        <item>Disclaimer</item>
 
-</string-array>
+    </string-array>
 
     <string name="info_lose_internet">No internet connection.Please check again!</string>
 

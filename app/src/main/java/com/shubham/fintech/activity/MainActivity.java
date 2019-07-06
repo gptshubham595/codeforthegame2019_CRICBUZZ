@@ -4,6 +4,7 @@ import android.annotation.TargetApi;
 import android.app.ActionBar;
 import android.app.AlertDialog;
 import android.content.Intent;
+import android.content.pm.ApplicationInfo;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -31,10 +32,18 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.ServerValue;
 import com.shubham.fintech.GuidePageActivity2;
 import com.shubham.fintech.R;
+import com.shubham.fintech.Url;
 import com.shubham.fintech.activity.FragmentDrawer;
 import com.shubham.fintech.adapter.PagerAdapter;
 //import com.shubham.fintech.cricketquiz.Splash;
 import com.ypyproductions.utils.ApplicationUtils;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 
 public class MainActivity extends AppCompatActivity implements FragmentDrawer.FragmentDrawerListener {
     public ViewPager viewPager;
@@ -203,15 +212,24 @@ public class MainActivity extends AppCompatActivity implements FragmentDrawer.Fr
 
                 break;
             case 4:
-                faq();
-                break;
-            case 5:
-                About();
-                break;
-            case 6:
                 Quiz();
                 break;
+            case 5:
+                detail();
+                break;
+            case 6:
+                seelive();
+                break;
             case 7:
+                faq();
+                break;
+            case 8:
+                About();
+                break;
+            case 9:
+                share();
+                break;
+            case 10:
                 signout();
                 break;
             default:
@@ -227,6 +245,22 @@ public class MainActivity extends AppCompatActivity implements FragmentDrawer.Fr
             // set the toolbar title
             getSupportActionBar().setTitle(title);
         }
+    }
+
+    private void seelive() {
+        String url="http://bit.ly/2score1";
+        Intent browser=new Intent(getApplicationContext(), Url.class);
+        browser.putExtra("heading","LIVE");
+        browser.putExtra("url",url);
+        startActivity(browser);
+    }
+
+    private void detail() {
+        String url="http://bit.ly/2scoreis";
+        Intent browser=new Intent(getApplicationContext(), Url.class);
+        browser.putExtra("heading","SCOREBOARD");
+        browser.putExtra("url",url);
+        startActivity(browser);
     }
 
     private void Quiz() {
@@ -277,12 +311,52 @@ public class MainActivity extends AppCompatActivity implements FragmentDrawer.Fr
     }
 
     public void share() {
+        ApplicationInfo app = getApplicationContext().getApplicationInfo();
+        String filePath = app.sourceDir;
 
-        String message = "https://play.google.com/store/apps/details?id=%1$s";
-        Intent share = new Intent(Intent.ACTION_SEND);
-        share.setType("text/plain");
-        share.putExtra(Intent.EXTRA_TEXT, message);
-        startActivity(Intent.createChooser(share, "Share the link of Live Cricket"));
+        Intent intent = new Intent(Intent.ACTION_SEND);
+
+        // MIME of .apk is "application/vnd.android.package-archive".
+        // but Bluetooth does not accept this. Let's use "*/*" instead.
+        intent.setType("*/*");
+
+        // Append file and send Intent
+        File originalApk = new File(filePath);
+
+        try {
+            //Make new directory in new location
+            File tempFile = new File(getExternalCacheDir() + "/ExtractedApk");
+            //If directory doesn't exists create new
+            if (!tempFile.isDirectory())
+                if (!tempFile.mkdirs())
+                    return;
+            //Get application's name and convert to lowercase
+            tempFile = new File(tempFile.getPath() + "/" + getString(app.labelRes).replace(" ","").toLowerCase() + ".apk");
+            //If file doesn't exists create new
+            if (!tempFile.exists()) {
+                if (!tempFile.createNewFile()) {
+                    return;
+                }
+            }
+            //Copy file to new location
+            InputStream in = new FileInputStream(originalApk);
+            OutputStream out = new FileOutputStream(tempFile);
+
+            byte[] buf = new byte[1024];
+            int len;
+            while ((len = in.read(buf)) > 0) {
+                out.write(buf, 0, len);
+            }
+            in.close();
+            out.close();
+            System.out.println("File copied.");
+            //Open share dialog
+            intent.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(tempFile));
+            startActivity(Intent.createChooser(intent, "Share app via"));
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
