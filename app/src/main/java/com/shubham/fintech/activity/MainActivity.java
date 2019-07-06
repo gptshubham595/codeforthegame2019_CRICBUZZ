@@ -33,6 +33,7 @@ import com.shubham.fintech.GuidePageActivity2;
 import com.shubham.fintech.R;
 import com.shubham.fintech.activity.FragmentDrawer;
 import com.shubham.fintech.adapter.PagerAdapter;
+//import com.shubham.fintech.cricketquiz.Splash;
 import com.ypyproductions.utils.ApplicationUtils;
 
 public class MainActivity extends AppCompatActivity implements FragmentDrawer.FragmentDrawerListener {
@@ -59,7 +60,7 @@ public class MainActivity extends AppCompatActivity implements FragmentDrawer.Fr
         ly = (FrameLayout) findViewById(R.id.container_body);
         ly.setVisibility(View.GONE);
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_layout);
-        tabLayout.addTab(tabLayout.newTab().setText(R.string.title_home));
+        tabLayout.addTab(tabLayout.newTab().setText("Live Cricket"));
         tabLayout.addTab(tabLayout.newTab().setText(R.string.title_friends));
         tabLayout.addTab(tabLayout.newTab().setText(R.string.title_IPL));
         tabLayout.addTab(tabLayout.newTab().setText(R.string.title_messages));
@@ -80,7 +81,7 @@ public class MainActivity extends AppCompatActivity implements FragmentDrawer.Fr
                 ly.setVisibility(View.GONE);
                 viewPager.setCurrentItem(tab.getPosition());
                 if (tab.getPosition() == 0) {
-                    mToolbar.setTitle(R.string.title_home);
+                    mToolbar.setTitle("LIVE CRICKET");
 
                 }
                 if (tab.getPosition() == 1) {
@@ -202,6 +203,15 @@ public class MainActivity extends AppCompatActivity implements FragmentDrawer.Fr
 
                 break;
             case 4:
+                faq();
+                break;
+            case 5:
+                About();
+                break;
+            case 6:
+                Quiz();
+                break;
+            case 7:
                 signout();
                 break;
             default:
@@ -217,6 +227,21 @@ public class MainActivity extends AppCompatActivity implements FragmentDrawer.Fr
             // set the toolbar title
             getSupportActionBar().setTitle(title);
         }
+    }
+
+    private void Quiz() {
+       // Intent i =new Intent(getApplicationContext(), Splash.class);
+        //startActivity(i);
+    }
+
+    private void faq() {
+        Intent i =new Intent(getApplicationContext(),FAQ.class);
+        startActivity(i);
+    }
+
+    private void About() {
+    Intent i =new Intent(getApplicationContext(),About.class);
+    startActivity(i);
     }
 
     private void signout() {

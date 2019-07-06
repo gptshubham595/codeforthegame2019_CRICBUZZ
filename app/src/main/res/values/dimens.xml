@@ -4,4 +4,19 @@
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="nav_drawer_width">260dp</dimen>
     <dimen name="fab_margin">20dp</dimen>
+
+
+    <dimen name="menu_icon_width">30dp</dimen>
+
+    <dimen name="scroll_menu_width">180dp</dimen>
+
+    <dimen name="menu_text_size">18sp</dimen>
+
+    <dimen name="grid_size">80dp</dimen>
+
+    <dimen name="bar_size">50dp</dimen>
+
+    <dimen name="quote_small_size">15sp</dimen>
+
+    <dimen name="quote_text_size">18sp</dimen>
 </resources>

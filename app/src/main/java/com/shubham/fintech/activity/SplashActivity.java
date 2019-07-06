@@ -79,6 +79,7 @@ public class SplashActivity extends Activity{
 							public void run() {
 								mProgressBar.setVisibility(View.INVISIBLE);
 								Intent mIntent = new Intent(SplashActivity.this, MainActivity.class);
+								mIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
 								startActivity(mIntent);
 								finish();
 							}

@@ -40,13 +40,14 @@ public class FragmentDrawer extends Fragment {
      private ViewPager viewPager;
     Integer[] img = {
             R.drawable.livecricket,
-    R.drawable.recentmatches,
+            R.drawable.recentmatches,
             R.drawable.ipl,
             R.drawable.news,
-    R.drawable.about,
-    R.drawable.rateme,
-    R.drawable.share,
-    R.drawable.more};
+            R.drawable.about,
+            R.drawable.ic_person,
+            R.drawable.icbulb,
+            R.drawable.ic_pass
+            };
 
     public FragmentDrawer() {
 

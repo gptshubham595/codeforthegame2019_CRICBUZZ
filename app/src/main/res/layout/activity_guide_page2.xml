@@ -90,7 +90,7 @@
             android:visibility="visible"
             android:layout_width="200dp"
             android:layout_height="40dp"
-            android:backgroundTint="@android:color/holo_red_dark"
+            android:backgroundTint="@android:color/holo_green_dark"
             android:text="@string/sign_up"
 
             android:textColor="@android:color/white"
@@ -158,7 +158,7 @@
         android:id="@+id/planet_target"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/planet_target"
+        android:src="@drawable/planet_target2"
         tools:ignore="ContentDescription"
         android:visibility="invisible"/>
 
@@ -191,7 +191,7 @@
         android:id="@+id/earth"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/earth"
+        android:src="@drawable/earth2"
         tools:ignore="ContentDescription"
         android:visibility="invisible"/>
 
@@ -204,6 +204,7 @@
         app:wowo_dynamicPath="true"
         app:wowo_headImageSrc="@drawable/rocket"
         app:wowo_headImageWidth="60dp"
+
         />
 
     <ImageView

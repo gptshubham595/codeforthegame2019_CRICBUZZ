@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.shubham.fintech">
+    package="com.shubham.fintech"
+    tools:ignore="GoogleAppIndexingWarning">
 
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.STORAGE" />
@@ -14,27 +15,29 @@
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
     <uses-permission android:name="android.permission.WRITE_SETTINGS" />
 
-
     <application
-        android:allowBackup="true"
         android:name=".App.AppController"
+        android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:largeHeap="true"
         android:roundIcon="@mipmap/ic_launcher"
         android:supportsRtl="true"
-
-        android:theme="@style/MyMaterialTheme">
+        android:theme="@style/MyMaterialTheme"
+        tools:replace="android:appComponentFactory"
+        android:appComponentFactory="whateverString"
+        >
+        <activity android:name=".activity.FAQ"></activity>
+        <activity android:name=".activity.About" />
         <activity
             android:name=".activity.MainActivity"
-            android:label="@string/app_name" >
-
-        </activity>
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".activity.SplashActivity"
             android:configChanges="touchscreen|keyboard|keyboardHidden|navigation|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"
             android:label="@string/app_name"
-            android:screenOrientation="portrait" >
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -43,9 +46,9 @@
         </activity>
         <activity
             android:name=".GuidePageActivity2"
-            android:theme="@style/ShowAppTheme">
-        </activity>
-
+            android:configChanges="touchscreen|keyboard|keyboardHidden|navigation|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"
+            android:screenOrientation="portrait"
+            android:theme="@style/ShowAppTheme" />
 
         <uses-library
             android:name="org.apache.http.legacy"
@@ -63,6 +66,51 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/provider_paths" />
         </provider>
+        <activity
+            android:name="com.facebook.FacebookActivity"
+            android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
+            android:label="@string/app_name"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+        <service android:name=".cricketquiz.serv"></service>
+
+
+        <activity
+            android:name=".cricketquiz.AboutUs"
+            android:label="@string/title_activity_about_us"></activity>
+        <activity android:name=".cricketquiz.AdsActivity"></activity>
+        <activity
+            android:name=".cricketquiz.LastScreen"
+            android:label="@string/title_activity_last_screen"></activity>
+        <activity
+            android:name=".cricketquiz.MainActivityq"
+            android:label="@string/app_name">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name="com.startapp.android.publish.list3d.List3DActivity"
+            android:theme="@android:style/Theme" />
+
+        <activity android:name="com.startapp.android.publish.OverlayActivity"
+            android:theme="@android:style/Theme.Translucent"
+            android:configChanges="orientation|keyboardHidden|screenSize" />
+
+        <activity android:name="com.startapp.android.publish.FullScreenActivity"
+            android:theme="@android:style/Theme"
+            android:configChanges="orientation|keyboardHidden|screenSize" />
+
+        <provider
+            android:name="com.facebook.FacebookContentProvider"
+            android:authorities="com.facebook.app.FacebookContentProvider493481567493903"
+            android:exported="true" />
+
+        <meta-data
+            android:name="io.fabric.ApiKey"
+            android:value="d04b524792a03c95687503a3970d9b3fe8313871" />
+
+
     </application>
 
 </manifest>

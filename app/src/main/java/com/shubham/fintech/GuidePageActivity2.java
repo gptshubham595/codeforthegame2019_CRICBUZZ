@@ -225,8 +225,7 @@ public class GuidePageActivity2 extends WoWoActivity {
     private void makedialog(){
         final AlertDialog alertDialog = new AlertDialog.Builder(this)
                 .setView(R.layout.dialog_option)
-                .setTitle("Help")
-                .setNegativeButton("close", null)
+                .setNegativeButton("OK", null)
                 .show();
 
     }
@@ -423,9 +422,9 @@ public class GuidePageActivity2 extends WoWoActivity {
         View text = findViewById(R.id.text);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) text.setZ(50);
         String[] texts = new String[]{
-                "HOME?",
-                "OR SKY?",
-                "OR UNIVERSE?",
+                "GAMES?",
+                "OR CRICKET?",
+                "OR DREAMIITG?",
                 "Let's Discover More!",
         };
         wowo.addAnimation(text)
