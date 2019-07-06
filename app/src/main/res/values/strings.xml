@@ -1,76 +1,134 @@
-<resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
+<?xml version="1.0"?>
+
+    <resources tools:ignore="MissingTranslation" xmlns:tools="http://schemas.android.com/tools">
+
     <string name="app_name">DREAMITG</string>
+
     <string name="need_a_new_account">NEED A NEW ACCOUNT ?</string>
+
     <string name="display_name">Display Name</string>
+
     <string name="email">Email</string>
+
     <string name="password">Password</string>
+
     <string name="create_account">CREATE ACCOUNT</string>
+
     <string name="log_out">Log Out</string>
+
     <string name="username">Username</string>
+
     <string name="guide_page">Guide Page</string>
+
     <string name="presents">presents</string>
+
     <string name="forgot">Forgot Password</string>
+
     <string name="sign_up">Sign Up</string>
+
     <string name="sign_in">Sign In</string>
+
     <string name="facebook_app_id">64766462375220</string>
+
     <string name="fb_login_protocol_scheme">fb64766462375220</string>
-    <string name="dreamiitg"><u>DREAMIITG</u></string>
+
+
+    -<string name="dreamiitg">
+
+<u>DREAMIITG</u>
+
+</string>
+
     <string name="emailreq">- Enter your mail id to register . \n eg: example@test.com </string>
-    <string name="passreq">- Enter your password  to register . \n eg: 12345678 </string>
-    <string name="loginreq">- After confirming mail just click sign in.  </string>
-    <string name="registerreq">- Enter mail and password and press sign up \n also confirm your account via mail id.  </string>
-    <string name="forgotreq">- Enter mail and press forgot option \n check mail for changing password  </string>
+
+    <string name="passreq">- Enter your password to register . \n eg: 12345678 </string>
+
+    <string name="loginreq">- After confirming mail just click sign in. </string>
+
+    <string name="registerreq">- Enter mail and password and press sign up \n also confirm your account via mail id. </string>
+
+    <string name="forgotreq">- Enter mail and press forgot option \n check mail for changing password </string>
 
     <string name="action_Disclaimer">Disclaimer</string>
+
     <string name="action_search">Search</string>
+
     <string name="drawer_open">Open</string>
+
     <string name="drawer_close">Close</string>
 
     <string name="nav_item_home">Live Cricket</string>
+
     <string name="nav_item_friends">Recent match</string>
+
     <string name="nav_item_IPL">IPL</string>
+
     <string name="nav_item_notifications">Latest News</string>
+
     <string name="about">About</string>
+
     <string name="sign_out">Sign out</string>
-    <!-- navigation drawer item labels  -->
-    <string-array name="nav_drawer_labels">
-        <item>@string/nav_item_home</item>
-        <item>@string/nav_item_friends</item>
-        <item>@string/nav_item_IPL</item>
-        <item>@string/nav_item_notifications</item>
-        <item>@string/about</item>
-        <item>"FAQ"</item>
-        <item>@string/sign_out</item>
-    </string-array>
+
+    <!-- navigation drawer item labels -->
+
+
+
+    -<string-array name="nav_drawer_labels">
+
+    <item>@string/nav_item_home</item>
+
+    <item>@string/nav_item_friends</item>
+
+    <item>@string/nav_item_IPL</item>
+
+    <item>@string/nav_item_notifications</item>
+
+    <item>@string/about</item>
+
+    <item>"FAQ"</item>
+
+    <item>@string/sign_out</item>
+
+</string-array>
 
     <string name="about_msg">A small project inspired by DREAM11 to make this DREAMIITG.</string>
+
     <string name="disclaimer_msg">This App based on Cricbuzz Api all Online Public Data Fetching from cricbuzz,Hence We are Not Violating Any Terms.</string>
+
     <string name="title_messages">Latest News</string>
+
     <string name="title_friends">Recent match</string>
+
     <string name="title_home">DREAMIITG</string>
+
     <string name="title_IPL">IPL</string>
+
     <string name="title_activity_full_scoreboard">full_scoreboard</string>
+
     <string name="title_activity_main2">Main2Activity</string>
 
     <string name="title_ok">OK</string>
+
     <string name="title_cancel">Cancel</string>
 
     <string name="title_warning">Warning</string>
 
     <string name="title_settings">Setting</string>
 
-    <string-array name="list_share">
-        <item>Disclaimer</item>
-    </string-array>
+
+    -<string-array name="list_share">
+
+    <item>Disclaimer</item>
+
+</string-array>
 
     <string name="info_lose_internet">No internet connection.Please check again!</string>
+
     <string name="title_activity_main">MainActivity</string>
 
     <string name="hello_world">Hello world!</string>
 
-
     <string name="title_activity_about_us">About Us</string>
-
 
     <string name="ok">OK</string>
 
@@ -91,4 +149,5 @@
     <string name="title_activity_ads">AdsActivity</string>
 
     <string name="title_activity_last_screen">LastScreen</string>
+
 </resources>
