@@ -13,7 +13,9 @@
         android:label="Tests for com.handmark.pulltorefresh.library.test"
         android:targetPackage="com.handmark.pulltorefresh.library.test" />
 
-    <application android:debuggable="true" >
+    <application
+        android:appComponentFactory="android.support.v4.app.CoreComponentFactory"
+        android:debuggable="true" >
         <uses-library android:name="android.test.runner" />
     </application>
 

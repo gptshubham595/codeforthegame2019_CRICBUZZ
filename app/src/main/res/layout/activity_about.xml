@@ -56,7 +56,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="This App is proper combo of Live Cricket,Scores,News and Faq's All together All in ONE PLACE, That's our Dream that's our"
+        android:text="This App is proper combo of online videos , blog post, adnd note making,All together All in ONE PLACE, That's our Dream that's our"
         android:textColor="#FFFFFF"
         android:gravity="center"
         android:layout_margin="8dp"
@@ -70,7 +70,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="DREAMIITG"
+        android:text="EDUCATEME"
         android:textColor="#FFFFFF"
         android:textSize="28dp"
         android:layout_below="@id/dev3"
