@@ -20,6 +20,7 @@ import com.github.vivchar.viewpagerindicator.ViewPagerIndicator;
 import com.google.firebase.database.FirebaseDatabase;
 import com.shubham.iitg.GuidePageActivity2;
 import com.shubham.iitg.R;
+import com.shubham.iitg.blogapp.MainActivity;
 
 import pl.droidsonroids.gif.GifImageView;
 
