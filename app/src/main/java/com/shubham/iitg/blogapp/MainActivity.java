@@ -285,7 +285,7 @@ public class MainActivity extends AppCompatActivity implements  NavigationView.O
 
             case R.id.action_notes:return true;
 
-            case R.id.action_share:return true;
+            case R.id.action_share:shareapp();return true;
 
             case R.id.action_contactus:startActivity(new Intent(this, Contact.class));
                 CustomIntent.customType(MainActivity.this,"fadein-to-fadeout"); return true;
@@ -297,6 +297,14 @@ public class MainActivity extends AppCompatActivity implements  NavigationView.O
         }
         drawerLayout.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    private void shareapp() {
+        Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
+        sharingIntent.setType("text/plain");
+        sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "EducateMe");
+        sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, getResources().getString(R.string.share_app_text));
+        startActivity(Intent.createChooser(sharingIntent, "Share app via"));
     }
 
     @Override

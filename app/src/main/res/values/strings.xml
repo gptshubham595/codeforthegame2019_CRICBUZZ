@@ -332,4 +332,5 @@
     <string name="restore_error">Restore error</string>
     <string name="not_implemented">This section has not been implemented for the beta version.</string>
     <string name="about_desc">A simple note taking app</string>
+    <string name="share_app_text">Transforming the Future</string>
 </resources>

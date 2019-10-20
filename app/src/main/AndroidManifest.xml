@@ -49,6 +49,15 @@
             android:name=".blogapp.NewPost"
             android:parentActivityName=".blogapp.MainActivity" />
         <activity android:name=".blogapp.Comments" android:parentActivityName=".blogapp.MainActivity" />
+        <activity android:name=".activity.About"
+            android:parentActivityName=".blogapp.MainActivity"
+            />
+        <activity android:name=".activity.Help"
+            android:parentActivityName=".blogapp.MainActivity"
+            />
+        <activity android:name=".activity.Contact"
+            android:parentActivityName=".blogapp.MainActivity"
+            />
 
         <activity
             android:name="downloader.video.xvlover.videodownloader.MainActivity"/>
@@ -66,10 +75,11 @@
             android:label="Settings"
             android:theme="@style/AppTheme" />
 
-        <activity android:name=".activity.EDITActivity" />
-        <activity android:name=".activity.Help" />
+        <activity android:name=".activity.EDITActivity"
+            android:parentActivityName=".blogapp.MainActivity"
+            />
         <activity android:name=".activity.Splash1" />
-        <activity android:name=".activity.Contact" />
+
 
         <activity
             android:name=".activity.MainActivity"
