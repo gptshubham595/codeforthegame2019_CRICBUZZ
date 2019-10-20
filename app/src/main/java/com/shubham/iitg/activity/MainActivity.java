@@ -60,10 +60,17 @@ public class MainActivity extends AppCompatActivity implements  NavigationView.O
         mLoginProgress = new ProgressDialog(this,R.style.dialog);
         mUserDatabase = FirebaseDatabase.getInstance().getReference().child("Users");
         Button btn=findViewById(R.id.down);
+        Button blog=findViewById(R.id.blog);
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
             startActivity(new Intent(getApplicationContext(), downloader.video.xvlover.videodownloader.MainActivity.class));
+            }
+        });
+        blog.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(), com.shubham.iitg.blogapp.MainActivity.class));
             }
         });
         drawerLayout = findViewById(R.id.drawer);

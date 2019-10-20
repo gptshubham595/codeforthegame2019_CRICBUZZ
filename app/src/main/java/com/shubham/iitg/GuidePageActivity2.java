@@ -26,7 +26,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.rengwuxian.materialedittext.MaterialEditText;
-import com.shubham.iitg.activity.MainActivity;
+import com.shubham.iitg.blogapp.MainActivity;
 import com.shubham.wowoviewpager.Animation.WoWoAlphaAnimation;
 import com.shubham.wowoviewpager.Animation.WoWoElevationAnimation;
 import com.shubham.wowoviewpager.Animation.WoWoPathAnimation;

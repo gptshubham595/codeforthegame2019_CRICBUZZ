@@ -35,6 +35,21 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity android:name=".blogapp.MainActivity"/>
+        <activity android:name=".blogapp.Login" />
+
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
+
+        <activity android:name=".blogapp.register" />
+        <activity android:name=".blogapp.AccounrSetup" />
+        <activity
+            android:name=".blogapp.NewPost"
+            android:parentActivityName=".blogapp.MainActivity" />
+        <activity android:name=".blogapp.Comments" android:parentActivityName=".blogapp.MainActivity" />
+
         <activity
             android:name="downloader.video.xvlover.videodownloader.MainActivity"/>
         <activity
@@ -45,6 +60,7 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="downloader.video.xvlover.videodownloader.MainActivity" />
         </activity>
+
         <activity
             android:name="downloader.video.xvlover.videodownloader.SettingActivity"
             android:label="Settings"

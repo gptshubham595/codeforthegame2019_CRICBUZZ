@@ -10,6 +10,11 @@
     <color name="blue_4">#8f87f9</color>
     <color name="blue_5">#7067f8</color>
 
+    <color name="Button">#ee495a</color>
+    <color name="btnBack">#f01a76</color>
+    <color name="bottom_text">#01ffd3</color>
+    <color name="BodyBackground">#141F37</color>
+
     <color name="black">#000000</color>
     <color name="red">#ff0000</color>
     <color name="green">#00ff00</color>

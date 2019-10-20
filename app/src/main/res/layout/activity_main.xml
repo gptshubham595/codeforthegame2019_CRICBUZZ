@@ -16,7 +16,16 @@
             android:id="@+id/down"
             android:text="Download videos"
             android:layout_height="wrap_content"/>
+        <Button
+            android:layout_width="match_parent"
+            android:layout_margin="8dp"
+            android:id="@+id/blog"
+            android:layout_above="@id/down"
+            android:text="Blog"
+            android:layout_height="wrap_content"/>
+
         </RelativeLayout>
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_gravity="start"
