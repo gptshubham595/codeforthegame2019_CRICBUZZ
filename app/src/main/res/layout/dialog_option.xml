@@ -9,8 +9,6 @@
     android:padding="8dp">
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_gravity="center"
-        android:gravity="center"
         android:layout_height="match_parent">
     <TextView
         android:layout_width="wrap_content"
@@ -18,7 +16,7 @@
         android:layout_height="wrap_content"
         android:textColor="#3c3c44"
         android:layout_margin="8dp"
-        android:text="HELP EDUCATEME"
+        android:text="@string/dreamiitg"
         android:gravity="center"
         android:textStyle="bold"
         android:textSize="22sp" />

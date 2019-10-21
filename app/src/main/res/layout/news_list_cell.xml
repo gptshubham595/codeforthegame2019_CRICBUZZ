@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    >
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="15dp"
+        android:background="@color/match_winning_colorname_gray">
+        <ImageView
+            android:layout_width="100dp"
+            android:layout_height="70dp"
+            android:id="@+id/news_img"
+            android:layout_marginRight="05dp"
+
+            />
+        <TextView
+            android:layout_marginTop="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="news description"
+            android:textColor="#222"
+            android:textSize="16dp"
+            android:layout_toRightOf="@+id/news_img"
+            android:layout_marginLeft="10dp"
+            android:maxLines="2"
+            android:id="@+id/hline"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/hline"
+            android:text="location"
+            android:textSize="16dp"
+            android:id="@+id/location"
+            android:textColor="#222"
+            android:textStyle="bold"
+            android:layout_toRightOf="@+id/news_img"
+            android:layout_marginLeft="10dp"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/hline"
+            android:text="Date"
+            android:textSize="16dp"
+            android:textColor="#222"
+            android:textStyle="bold"
+            android:id="@+id/news_date"
+            android:layout_toRightOf="@+id/location"
+            android:layout_marginLeft="10dp"
+            />
+
+    </RelativeLayout>
+</LinearLayout>
