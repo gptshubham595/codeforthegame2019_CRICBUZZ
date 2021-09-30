@@ -3,7 +3,7 @@
 # **DREAMIITG**
 
 
-Android app inspired by Dream11 (Developed on Android Studio | Java)
+Android app inspired by Dream11 (Developed on Android Studio & Java)
 
 
 
